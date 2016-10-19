@@ -16,7 +16,7 @@
     "api",
     "koa",
     "apollo-server"
-    ],
+  ],
   "author": "Tadej Stanic",
   "license": "ISC",
   "devDependencies": {
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "apollo-server": "^0.3.2",
+    "contextable": "^0.3.2",
     "glob": "^7.1.1",
     "graphql": "^0.7.2",
     "graphql-tools": "^0.7.2",

@@ -1,18 +1,22 @@
 import userResolvers from './user';
+import restaurantResolvers from './restaurant';
 
-const queryResolvers = {
-  Query: {
-    async user(root, {name}, ctx) {
-      let collection = ctx.http.db.collection('users');
-		  return await collection.findOne({name: name});
-    },
-    async users(root, args, ctx) {
-      let collection = ctx.http.db.collection('users');
-		  return await collection.find().toArray();
-    }
-  }
+const mergedResolvers = Object.assign({},
+  userResolvers,
+  restaurantResolvers
+);
+
+const allResolvers = {
+  Query: {}
 };
 
-const allResolvers = Object.assign({}, queryResolvers,  userResolvers);
+for (let key in mergedResolvers){
+  let currentResolver = mergedResolvers[key];
+  if (currentResolver.Query){
+    Object.assign(allResolvers.Query, currentResolver.Query);
+    delete currentResolver.Query;
+  }
+  Object.assign(allResolvers, currentResolver);
+}
 
 export default allResolvers;

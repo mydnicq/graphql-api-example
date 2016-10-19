@@ -1,4 +1,6 @@
 type Query {
 	user(name: String!): User
 	users: [User]
+	usersCount: Int
+	restaurant: Restaurant
 }

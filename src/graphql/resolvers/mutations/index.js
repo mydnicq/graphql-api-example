@@ -1,13 +1,17 @@
+import {userMutationResolvers} from './user';
+import {restaurantMutationResolvers} from './restaurant';
+
+const allResolvers = Object.assign({},
+  userMutationResolvers,
+  restaurantMutationResolvers
+);
+
 const mutationResolvers = {
-  Mutation: {
-    async createUser(root, {input}, ctx) {
-      let collection = ctx.http.db.collection('users');
-		  let result = await collection.insertOne(input);
-      return await collection.findOne({'_id': result.insertedId});
-    }
-  }
+  Mutation: {}
 };
 
-const allResolvers = Object.assign({}, mutationResolvers);
+for (let key in allResolvers){
+  mutationResolvers.Mutation[key] = allResolvers[key];
+}
 
-export default allResolvers;
+export default mutationResolvers;

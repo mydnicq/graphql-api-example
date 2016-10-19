@@ -4,20 +4,18 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+var _user = require('./user');
+
+var _restaurant = require('./restaurant');
+
+const allResolvers = Object.assign({}, _user.userMutationResolvers, _restaurant.restaurantMutationResolvers);
 
 const mutationResolvers = {
-  Mutation: {
-    createUser(root, { input }, ctx) {
-      return _asyncToGenerator(function* () {
-        let collection = ctx.http.db.collection('users');
-        let result = yield collection.insertOne(input);
-        return yield collection.findOne({ '_id': result.insertedId });
-      })();
-    }
-  }
+  Mutation: {}
 };
 
-const allResolvers = Object.assign({}, mutationResolvers);
+for (let key in allResolvers) {
+  mutationResolvers.Mutation[key] = allResolvers[key];
+}
 
-exports.default = allResolvers;
+exports.default = mutationResolvers;

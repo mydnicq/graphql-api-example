@@ -2,40 +2,26 @@ import config from '../config';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import router from '../router';
-import MongoClient from 'mongodb';
-import path from 'path';
-import loadSchema from '../graphql/loader';
+import {ApplicationContext} from '../context'
 
 class Http {
 	constructor() {
 		this.config = Object.assign({}, config);
 		this.server = null;
-		this.db = null;
-		this.graphqlSchema = null;
-	}
-
-	async dbConnect() {
-		let url = 'mongodb://localhost:27017/test';
-		return this.db = await MongoClient(url);
-	}
-
-	async loadGraphqlSchema() {
-		let path = require('path').resolve(__dirname, '../**/*.graphql')
-		return this.graphqlSchema = await loadSchema(path);
 	}
 
 	async start() {
 		let {port} = this.config;
 
-		await this.dbConnect();
-
-		await this.loadGraphqlSchema();
+		// initializing and starting application context
+	  let appCtx = new ApplicationContext();
+	  await appCtx.start();
 
 		this.server = new Koa();
 		this.server
 			.use(async (ctx, next) => {
 				console.log(ctx.method, ctx.url);
-				ctx.http = this;
+				ctx.appCtx = appCtx;
 				await next();
 			})
 			.use(bodyParser())

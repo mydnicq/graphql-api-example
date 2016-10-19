@@ -8,7 +8,7 @@ let graphql = (() => {
 	var _ref = _asyncToGenerator(function* (ctx, next) {
 		let Resolvers = Object.assign({}, _queries2.default, _mutations2.default);
 		let graphqlSchema = (0, _graphqlTools.makeExecutableSchema)({
-			typeDefs: ctx.http.graphqlSchema,
+			typeDefs: ctx.appCtx.graphqlSchema,
 			resolvers: Resolvers
 		});
 		return {
@@ -43,8 +43,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 const router = (0, _koaRouter2.default)();
-exports.default = router;
-
 
 router.post('/graphql', (0, _apolloServer.apolloKoa)(graphql));
 router.get('/graphiql', (0, _apolloServer.graphiqlKoa)({ endpointURL: '/graphql' }));
+
+exports.default = router;

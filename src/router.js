@@ -5,7 +5,6 @@ import mutationResolvers from './graphql/resolvers/mutations/';
 import { makeExecutableSchema } from 'graphql-tools';
 
 const router = KoaRouter();
-export default router;
 
 router.post('/graphql', apolloKoa(graphql));
 router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
@@ -13,11 +12,13 @@ router.get('/graphiql', graphiqlKoa({ endpointURL: '/graphql' }));
 async function graphql(ctx, next) {
 	let Resolvers = Object.assign({}, queryResolvers, mutationResolvers);
 	let graphqlSchema = makeExecutableSchema({
-		typeDefs: ctx.http.graphqlSchema,
+		typeDefs: ctx.appCtx.graphqlSchema,
 		resolvers: Resolvers,
 	});
-	return { 
+	return {
 		schema: graphqlSchema,
 		context: ctx
 	}
 }
+
+export default router;
