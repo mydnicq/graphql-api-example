@@ -20,7 +20,6 @@ class Http {
 		this.server = new Koa();
 		this.server
 			.use(async (ctx, next) => {
-				console.log(ctx.method, ctx.url);
 				ctx.appCtx = appCtx;
 				await next();
 			})

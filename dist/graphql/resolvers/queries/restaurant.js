@@ -9,9 +9,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 exports.default = {
   restaurantResolvers: {
     Query: {
-      restaurant(root, { name }, ctx) {
+      restaurantCount(root, { name }, ctx) {
         return _asyncToGenerator(function* () {
-          return yield ctx.appCtx.mongo.collection('users').findOne({ name: name });
+          let Restaurant = ctx.appCtx.getModel('Restaurant');
+          return yield Restaurant.count();
         })();
       }
     },

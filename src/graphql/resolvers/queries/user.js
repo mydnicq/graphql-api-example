@@ -13,8 +13,8 @@ export default {
       }
     },
     User: {
-      async name(root, args, ctx) {
-        return root.name;
+      async restaurants({restaurant_ids}, args, ctx) {
+        if (restaurant_ids) return await ctx.appCtx.mongo.collection('restaurants').find({restaurant_id: {$in: restaurant_ids}}).toArray();
       }
     }
   }

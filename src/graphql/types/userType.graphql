@@ -2,9 +2,12 @@ type User {
 	_id: ID!
 	name: String
 	email: String
+	restaurant_ids: [Int]
+	restaurants: [Restaurant]
 }
 
 input UserInput {
   name: String!
   email: String!
+	restaurant_ids: [Int]
 }

@@ -16,6 +16,9 @@ export const fields = {
 				message: 'is required'
 			}
 		}
+	},
+	restaurant_ids: {
+		type: 'Array'
 	}
 };
 

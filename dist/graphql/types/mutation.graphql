@@ -1,5 +1,6 @@
 type Mutation {
   # Create a new user, returns the new user
   createUser(input: UserInput): User
-  createRestaurant(input: UserInput): Restaurant
+  # Create a new restaurant, returns the new restaurant
+  createRestaurant(input: RestaurantInput): Restaurant
 }

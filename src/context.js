@@ -1,8 +1,10 @@
+import {path} from 'path';
 import {MongoClient} from 'mongodb';
+import {loadGqlSchema} from './graphql/loader';
 import {Context} from 'contextable';
 import {schema as userSchema} from './models/user';
-import loadGqlSchema from './graphql/loader';
-import {path} from 'path';
+import {schema as restaurantSchema} from './models/restaurant';
+
 /*
 * Application context class.
 */
@@ -21,6 +23,7 @@ export class ApplicationContext extends Context {
     this._graphqlSchema = null;
     // attaching models
     this.defineModel('User', userSchema);
+    this.defineModel('Restaurant', restaurantSchema);
   }
 
   /*

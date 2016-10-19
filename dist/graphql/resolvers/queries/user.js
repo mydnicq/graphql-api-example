@@ -27,9 +27,9 @@ exports.default = {
       }
     },
     User: {
-      name(root, args, ctx) {
+      restaurants({ restaurant_ids }, args, ctx) {
         return _asyncToGenerator(function* () {
-          return root.name;
+          if (restaurant_ids) return yield ctx.appCtx.mongo.collection('restaurants').find({ restaurant_id: { $in: restaurant_ids } }).toArray();
         })();
       }
     }

@@ -45,7 +45,6 @@ class Http {
 			_this.server = new _koa2.default();
 			_this.server.use((() => {
 				var _ref = _asyncToGenerator(function* (ctx, next) {
-					console.log(ctx.method, ctx.url);
 					ctx.appCtx = appCtx;
 					yield next();
 				});

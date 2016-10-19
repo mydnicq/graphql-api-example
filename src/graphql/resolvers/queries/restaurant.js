@@ -1,8 +1,9 @@
 export default {
   restaurantResolvers: {
     Query: {
-      async restaurant(root, {name}, ctx) {
-        return await ctx.appCtx.mongo.collection('users').findOne({name: name});
+      async restaurantCount(root, {name}, ctx) {
+        let Restaurant = ctx.appCtx.getModel('Restaurant');
+        return await Restaurant.count();
       }
     },
     Restaurant: {

@@ -1,4 +1,14 @@
 type Restaurant {
 	_id: ID!
-	name: String
+	name: String!
+	borough: String
+	cuisine: String
+	restaurant_id: String
+}
+
+input RestaurantInput {
+  name: String!
+	borough: String
+	cuisine: String
+	restaurant_id: String
 }

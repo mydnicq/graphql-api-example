@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -8,9 +8,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 const restaurantMutationResolvers = exports.restaurantMutationResolvers = {
   createRestaurant(root, { input }, ctx) {
-    // let User = ctx.appCtx.getModel('User');
-    // return await User.insert(input);
-
-    return _asyncToGenerator(function* () {})();
+    return _asyncToGenerator(function* () {
+      let Restaurant = ctx.appCtx.getModel('Restaurant');
+      return yield Restaurant.create(input);
+    })();
   }
 };

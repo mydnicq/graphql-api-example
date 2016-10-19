@@ -10,6 +10,12 @@ var _contextable = require('contextable');
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 const fields = exports.fields = {
+	borough: {
+		type: 'String'
+	},
+	cuisine: {
+		type: 'String'
+	},
 	name: {
 		type: 'String',
 		validate: {
@@ -18,16 +24,8 @@ const fields = exports.fields = {
 			}
 		}
 	},
-	email: {
-		type: 'String',
-		validate: {
-			presence: {
-				message: 'is required'
-			}
-		}
-	},
-	restaurant_ids: {
-		type: 'Array'
+	restaurant_id: {
+		type: 'String'
 	}
 };
 
@@ -37,18 +35,18 @@ const classMethods = exports.classMethods = {
 		var _this = this;
 
 		return _asyncToGenerator(function* () {
-			return yield _this.ctx.mongo.collection('users').count();
+			return yield _this.ctx.mongo.collection('restaurants').count();
 		})();
 	},
 
-	insert(input = {}) {
+	create(input = {}) {
 		var _this2 = this;
 
 		return _asyncToGenerator(function* () {
 			let model = new _this2.Model(input);
 			try {
 				yield model.validate();
-				yield _this2.ctx.mongo.collection('users').insertOne(model);
+				yield _this2.ctx.mongo.collection('restaurants').insertOne(model);
 			} catch (e) {
 				throw yield model.handle(e);
 			}
@@ -58,18 +56,7 @@ const classMethods = exports.classMethods = {
 
 };
 
-const instanceMethods = exports.instanceMethods = {
-	insert: (() => {
-		var _ref = _asyncToGenerator(function* (v) {
-			let res = yield undefined.ctx.mongo.collection('users').insertOne(undefined);
-			return undefined.populate(res[0]);
-		});
-
-		return function insert(_x) {
-			return _ref.apply(this, arguments);
-		};
-	})()
-};
+const instanceMethods = exports.instanceMethods = {};
 
 /*
 * Model's schema.

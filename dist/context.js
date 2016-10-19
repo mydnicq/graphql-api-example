@@ -5,19 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ApplicationContext = undefined;
 
+var _path = require('path');
+
 var _mongodb = require('mongodb');
+
+var _loader = require('./graphql/loader');
 
 var _contextable = require('contextable');
 
 var _user = require('./models/user');
 
-var _loader = require('./graphql/loader');
-
-var _loader2 = _interopRequireDefault(_loader);
-
-var _path = require('path');
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _restaurant = require('./models/restaurant');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
@@ -39,6 +37,7 @@ class ApplicationContext extends _contextable.Context {
     this._graphqlSchema = null;
     // attaching models
     this.defineModel('User', _user.schema);
+    this.defineModel('Restaurant', _restaurant.schema);
   }
 
   /*
@@ -66,7 +65,7 @@ class ApplicationContext extends _contextable.Context {
       }
       if (!_this._graphqlSchema) {
         let path = require('path').resolve(__dirname, './**/*.graphql');
-        _this._graphqlSchema = yield (0, _loader2.default)(path);
+        _this._graphqlSchema = yield (0, _loader.loadGqlSchema)(path);
       }
       return _this;
     })();
