@@ -4,6 +4,14 @@ type Restaurant {
 	borough: String
 	cuisine: String
 	restaurant_id: String
+	address: RestaurantAddress
+}
+
+type RestaurantAddress {
+	building: String
+	street: String
+	zipcode: String
+	coord: [Float]
 }
 
 input RestaurantInput {
@@ -11,4 +19,18 @@ input RestaurantInput {
 	borough: String
 	cuisine: String
 	restaurant_id: String
+	address: RestaurantAddressInput
+}
+
+input RestaurantAddressInput {
+	building: String
+	street: String
+	zipcode: String
+	coord: [Float]
+}
+
+# If a new restaurant wasn't created, an array of errors will be provided for showing per field error messaging.
+type CreateRestaurantResponse {
+  restaurant: Restaurant,
+  errors: [Error]
 }

@@ -9,7 +9,12 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 exports.default = {
   restaurantResolvers: {
     Query: {
-      restaurantCount(root, { name }, ctx) {
+      restaurant(root, { name }, ctx) {
+        return _asyncToGenerator(function* () {
+          return yield ctx.appCtx.mongo.collection('restaurants').findOne({ 'name': name });
+        })();
+      },
+      restaurantCount(root, args, ctx) {
         return _asyncToGenerator(function* () {
           let Restaurant = ctx.appCtx.getModel('Restaurant');
           return yield Restaurant.count();
@@ -19,6 +24,7 @@ exports.default = {
     Restaurant: {
       name(root, args, ctx) {
         return _asyncToGenerator(function* () {
+          // Here you can manipulate field value before it is returned to the client
           return root.name;
         })();
       }

@@ -1,5 +1,32 @@
 import {Schema} from 'contextable';
 
+const addressSchema = new Schema({
+	fields: {
+		building: {
+			type: 'String'
+		},
+		coord: {
+			type: ['Float'],
+			validate: {
+				presence: {
+					message: 'is required'
+				}
+			}
+		},
+		street: {
+			type: 'String',
+			validate: {
+				presence: {
+					message: 'is required'
+				}
+			}
+		},
+		zipcode: {
+			type: 'String'
+		}
+	}
+});
+
 export const fields = {
 	borough: {
 		type: 'String'
@@ -16,7 +43,15 @@ export const fields = {
 		}
 	},
 	restaurant_id: {
-		type: 'String'
+		type: 'String',
+		validate: {
+			absence: {
+				message: 'is required'
+			}
+		}
+	},
+	address: {
+		type: addressSchema
 	}
 };
 
@@ -27,15 +62,19 @@ export const classMethods = {
   },
 
 	async create(input={}) {
-		let model = new this.Model(input);
+		let restaurant = new this.Model(input);
+		let errors = null;
+
 		try {
-			await model.validate();
-			await this.ctx.mongo.collection('restaurants').insertOne(model);
+			await restaurant.validate();
+			await this.ctx.mongo.collection('restaurants').insertOne(restaurant);
 		}
 		catch(e){
-			throw await model.handle(e);
+			errors = await restaurant.handle(e);
+			errors = errors.toArray();
+			restaurant = null;
 		}
-		return model;
+		return {restaurant, errors};
 	}
 
 };

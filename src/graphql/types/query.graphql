@@ -1,6 +1,10 @@
+# These are all available methods for getting data from the API
 type Query {
+	# Get user by name
 	user(name: String!): User
 	users: [User]
 	usersCount: Int
+	# Get restaurant data
+	restaurant(name: String!): Restaurant
 	restaurantCount: Int
 }

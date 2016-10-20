@@ -9,6 +9,33 @@ var _contextable = require('contextable');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+const addressSchema = new _contextable.Schema({
+	fields: {
+		building: {
+			type: 'String'
+		},
+		coord: {
+			type: ['Float'],
+			validate: {
+				presence: {
+					message: 'is required'
+				}
+			}
+		},
+		street: {
+			type: 'String',
+			validate: {
+				presence: {
+					message: 'is required'
+				}
+			}
+		},
+		zipcode: {
+			type: 'String'
+		}
+	}
+});
+
 const fields = exports.fields = {
 	borough: {
 		type: 'String'
@@ -25,7 +52,15 @@ const fields = exports.fields = {
 		}
 	},
 	restaurant_id: {
-		type: 'String'
+		type: 'String',
+		validate: {
+			absence: {
+				message: 'is required'
+			}
+		}
+	},
+	address: {
+		type: addressSchema
 	}
 };
 
@@ -43,14 +78,18 @@ const classMethods = exports.classMethods = {
 		var _this2 = this;
 
 		return _asyncToGenerator(function* () {
-			let model = new _this2.Model(input);
+			let restaurant = new _this2.Model(input);
+			let errors = null;
+
 			try {
-				yield model.validate();
-				yield _this2.ctx.mongo.collection('restaurants').insertOne(model);
+				yield restaurant.validate();
+				yield _this2.ctx.mongo.collection('restaurants').insertOne(restaurant);
 			} catch (e) {
-				throw yield model.handle(e);
+				errors = yield restaurant.handle(e);
+				errors = errors.toArray();
+				restaurant = null;
 			}
-			return model;
+			return { restaurant, errors };
 		})();
 	}
 
