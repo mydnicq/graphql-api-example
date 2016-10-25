@@ -44,11 +44,11 @@ export const fields = {
 	},
 	restaurant_id: {
 		type: 'String',
-		validate: {
-			absence: {
-				message: 'is required'
-			}
-		}
+		// validate: {
+		// 	absence: {
+		// 		message: 'is required'
+		// 	}
+		// }
 	},
 	address: {
 		type: addressSchema

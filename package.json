@@ -15,7 +15,7 @@
     "graphql",
     "api",
     "koa",
-    "apollo-server"
+    "graphql-server"
   ],
   "author": "Tadej Stanic",
   "license": "ISC",
@@ -25,14 +25,15 @@
     "babel-preset-node6": "^11.0.0"
   },
   "dependencies": {
-    "apollo-server": "^0.3.2",
     "contextable": "^0.3.2",
     "glob": "^7.1.1",
     "graphql": "^0.7.2",
+    "graphql-server-koa": "^0.4.3",
     "graphql-tools": "^0.7.2",
     "koa": "^2.0.0-alpha.7",
     "koa-bodyparser": "^3.2.0",
     "koa-convert": "^1.2.0",
+    "koa-cors": "0.0.16",
     "koa-router": "^7.0.1",
     "mongodb": "^2.2.10"
   }

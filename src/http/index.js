@@ -2,7 +2,8 @@ import config from '../config';
 import Koa from 'koa';
 import bodyParser from 'koa-bodyparser';
 import router from '../router';
-import {ApplicationContext} from '../context'
+import {ApplicationContext} from '../context';
+import cors from 'koa-cors';
 
 class Http {
 	constructor() {
@@ -23,6 +24,7 @@ class Http {
 				ctx.appCtx = appCtx;
 				await next();
 			})
+			.use(cors())
 			.use(bodyParser())
 			.use(router.routes())
 			.use(router.allowedMethods());

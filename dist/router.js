@@ -26,7 +26,7 @@ var _koaRouter = require('koa-router');
 
 var _koaRouter2 = _interopRequireDefault(_koaRouter);
 
-var _apolloServer = require('apollo-server');
+var _graphqlServerKoa = require('graphql-server-koa');
 
 var _queries = require('./graphql/resolvers/queries/');
 
@@ -44,7 +44,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 const router = (0, _koaRouter2.default)();
 
-router.post('/graphql', (0, _apolloServer.apolloKoa)(graphql));
-router.get('/graphiql', (0, _apolloServer.graphiqlKoa)({ endpointURL: '/graphql' }));
+router.post('/graphql', (0, _graphqlServerKoa.graphqlKoa)(graphql));
+router.get('/graphiql', (0, _graphqlServerKoa.graphiqlKoa)({ endpointURL: '/graphql' }));
 
 exports.default = router;

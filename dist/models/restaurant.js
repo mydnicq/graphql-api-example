@@ -52,12 +52,7 @@ const fields = exports.fields = {
 		}
 	},
 	restaurant_id: {
-		type: 'String',
-		validate: {
-			absence: {
-				message: 'is required'
-			}
-		}
+		type: 'String'
 	},
 	address: {
 		type: addressSchema
