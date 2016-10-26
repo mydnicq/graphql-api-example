@@ -11,3 +11,9 @@ input UserInput {
   email: String!
 	restaurant_ids: [Int]
 }
+
+extend type Query {
+	# Get user by name
+	user(name: String!): User
+	usersCount: Int
+}

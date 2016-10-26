@@ -34,3 +34,14 @@ type CreateRestaurantResponse {
   restaurant: Restaurant,
   errors: [Error]
 }
+
+extend type Query {
+	# Get restaurant data.
+	restaurant(name: String!): Restaurant
+	restaurantCount: Int
+}
+
+extend type Mutation {
+	# Create a new restaurant, returns the new restaurant.
+	createRestaurant(input: RestaurantInput): CreateRestaurantResponse
+}
