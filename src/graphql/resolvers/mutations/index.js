@@ -1,5 +1,5 @@
-import {userMutationResolvers} from './user';
-import {restaurantMutationResolvers} from './restaurant';
+import { userMutationResolvers } from './user';
+import { restaurantMutationResolvers } from './restaurant';
 
 const allResolvers = Object.assign({},
   userMutationResolvers,
@@ -7,11 +7,13 @@ const allResolvers = Object.assign({},
 );
 
 const mutationResolvers = {
-  Mutation: {}
+  Mutation: {},
 };
 
-for (let key in allResolvers){
-  mutationResolvers.Mutation[key] = allResolvers[key];
+for (let key in allResolvers) {
+  if ({}.hasOwnProperty.call(allResolvers, key)) {
+    mutationResolvers.Mutation[key] = allResolvers[key];
+  }
 }
 
 export default mutationResolvers;

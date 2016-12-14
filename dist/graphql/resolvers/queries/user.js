@@ -11,7 +11,9 @@ exports.default = {
     Query: {
       user(root, { name }, ctx) {
         return _asyncToGenerator(function* () {
-          return yield ctx.appCtx.mongo.collection('users').findOne({ name: name });
+          return yield ctx.appCtx.mongo.collection('users').findOne({
+            name: name
+          });
         })();
       },
       users(root, args, ctx) {
@@ -27,9 +29,13 @@ exports.default = {
       }
     },
     User: {
-      restaurants({ restaurant_ids }, args, ctx) {
+      restaurants({ restaurantIds }, args, ctx) {
         return _asyncToGenerator(function* () {
-          if (restaurant_ids) return yield ctx.appCtx.mongo.collection('restaurants').find({ restaurant_id: { $in: restaurant_ids } }).toArray();
+          if (restaurantIds) return yield ctx.appCtx.mongo.collection('restaurants').find({
+            restaurant_id: {
+              $in: restaurant_ids
+            }
+          }).toArray();
         })();
       }
     }

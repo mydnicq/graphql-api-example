@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ApplicationContext = undefined;
 
-var _path = require('path');
-
 var _mongodb = require('mongodb');
 
 var _loader = require('./graphql/loader');
@@ -19,16 +17,15 @@ var _restaurant = require('./models/restaurant');
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
-/*
-* Application context class.
-*/
-
+/**
+ * Application context class.
+ */
 class ApplicationContext extends _contextable.Context {
 
-  /*
-  * Class constructor.
-  */
-
+  /**
+   * Class constructor.
+   * @param {Object} attrs
+   */
   constructor(attrs) {
     super(attrs);
 
@@ -40,22 +37,25 @@ class ApplicationContext extends _contextable.Context {
     this.defineModel('Restaurant', _restaurant.schema);
   }
 
-  /*
-  * Public properties
-  */
-
+  /**
+   * Public properties
+   */
   get mongo() {
     return this._mongo;
   }
 
+  /**
+   * [graphqlSchema description]
+   * @return {Object} Returns graphqlSchema object
+   */
   get graphqlSchema() {
     return this._graphqlSchema;
   }
 
-  /*
-  * Starts context services.
-  */
-
+  /**
+   * Starts context services.
+   * @return {Object}
+   */
   start() {
     var _this = this;
 
@@ -71,10 +71,10 @@ class ApplicationContext extends _contextable.Context {
     })();
   }
 
-  /*
-  * Stops context services.
-  */
-
+  /**
+   * Stops context services.
+   * @return {Object}
+   */
   stop() {
     var _this2 = this;
 

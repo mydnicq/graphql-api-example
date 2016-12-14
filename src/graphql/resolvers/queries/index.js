@@ -7,16 +7,18 @@ const mergedResolvers = Object.assign({},
 );
 
 const allResolvers = {
-  Query: {}
+  Query: {},
 };
 
-for (let key in mergedResolvers){
-  let currentResolver = mergedResolvers[key];
-  if (currentResolver.Query){
-    Object.assign(allResolvers.Query, currentResolver.Query);
-    delete currentResolver.Query;
+for (let key in mergedResolvers) {
+  if ({}.hasOwnProperty.call(mergedResolvers, key)) {
+    let currentResolver = mergedResolvers[key];
+    if (currentResolver.Query) {
+      Object.assign(allResolvers.Query, currentResolver.Query);
+      delete currentResolver.Query;
+    }
+    Object.assign(allResolvers, currentResolver);
   }
-  Object.assign(allResolvers, currentResolver);
 }
 
 export default allResolvers;

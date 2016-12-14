@@ -37,6 +37,10 @@ const loadGqlSchema = exports.loadGqlSchema = function (pattern) {
   })());
 };
 
+/**
+ * @param  {String} pattern
+ * @return {Promise}
+ */
 function getGlob(pattern) {
   return new Promise((resolve, reject) => {
     (0, _glob2.default)(pattern, (err, files) => {
@@ -49,6 +53,10 @@ function getGlob(pattern) {
   });
 }
 
+/**
+ * @param  {Array} fileNames
+ * @return {Promise}
+ */
 function makeSchema(fileNames) {
   const promises = fileNames.map(readFile);
   return Promise.all(promises).then(fileContentArr => {
@@ -58,6 +66,10 @@ function makeSchema(fileNames) {
   });
 }
 
+/**
+ * @param  {String} fileName
+ * @return {Promise}
+ */
 function readFile(fileName) {
   return new Promise((resolve, reject) => {
     fs.readFile(fileName, 'utf8', (err, data) => {

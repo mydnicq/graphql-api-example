@@ -24,7 +24,8 @@ exports.default = {
     Restaurant: {
       name(root, args, ctx) {
         return _asyncToGenerator(function* () {
-          // Here you can manipulate field value before it is returned to the client
+          // Here you can manipulate field value before it is
+          // returned to the client
           return root.name;
         })();
       }

@@ -1,8 +1,11 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+  value: true
 });
 exports.default = {
-	port: process.env.PORT || 3010
+  port: process.env.PORT || 3010,
+  // Access-Control-Allow-Origin CORS header can be string to restrict allowed origin (i.e. http://localhost:4444)
+  // or true/false to completely enable/disable CORS
+  allowOrigin: true
 };

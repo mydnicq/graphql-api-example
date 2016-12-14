@@ -15,7 +15,9 @@ const mutationResolvers = {
 };
 
 for (let key in allResolvers) {
-  mutationResolvers.Mutation[key] = allResolvers[key];
+  if ({}.hasOwnProperty.call(allResolvers, key)) {
+    mutationResolvers.Mutation[key] = allResolvers[key];
+  }
 }
 
 exports.default = mutationResolvers;
