@@ -1,17 +1,14 @@
-import config from '../config';
-// import Koa from 'koa';
-import bodyParser from 'body-parser';
-import router from '../router';
-import { ApplicationContext } from '../context';
-import cors from 'cors';
-// import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-
-import express from 'express';
+const { config } = require('../config');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { router } = require('../router');
+const { ApplicationContext } = require('../context');
+const cors = require('cors');
 
 /**
  * Http server module
  */
-class Http {
+exports.HTTP = class HTTP {
   /**
    * Class initializing
    */
@@ -45,6 +42,4 @@ class Http {
     // .use(router.allowedMethods());
     return this.server.listen({ port: port });
   }
-}
-
-export default Http;
+};

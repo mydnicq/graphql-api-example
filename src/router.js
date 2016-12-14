@@ -1,17 +1,15 @@
-// import KoaRouter from 'koa-router';
-import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import queryResolvers from './graphql/resolvers/queries/';
-import mutationResolvers from './graphql/resolvers/mutations/';
-import { makeExecutableSchema } from 'graphql-tools';
-import Express from 'express';
+const express = require('express');
+const { graphqlExpress, graphiqlExpress } = require('graphql-server-express');
+const { queryResolvers } = require('./graphql/resolvers/queries/');
+const { mutationResolvers } = require('./graphql/resolvers/mutations/');
+const { makeExecutableSchema } = require('graphql-tools');
 
-const router = Express.Router(); // eslint-disable-line new-cap
+const router = express.Router(); // eslint-disable-line new-cap
 
 router.use('/graphql', graphqlExpress(graphql));
 router.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
 /**
- * [graphql description]
  * @param  {Object}  req
  * @param  {Object}  res
  * @return {Object}
@@ -28,4 +26,4 @@ async function graphql(req, res) {
   };
 }
 
-export default router;
+exports.router = router;

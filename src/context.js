@@ -1,13 +1,13 @@
-import { MongoClient } from 'mongodb';
-import { loadGqlSchema } from './graphql/loader';
-import { Context } from 'contextable';
-import { schema as userSchema } from './models/user';
-import { schema as restaurantSchema } from './models/restaurant';
+const MongoClient = require('mongodb');
+const { loadGqlSchema } = require('./graphql/loader');
+const { Context } = require('contextable');
+const userSchema = require('./models/user').schema;
+const restaurantSchema = require('./models/restaurant').schema;
 
 /**
  * Application context class.
  */
-export class ApplicationContext extends Context {
+exports.ApplicationContext = class ApplicationContext extends Context {
 
   /**
    * Class constructor.
@@ -69,4 +69,4 @@ export class ApplicationContext extends Context {
     return this;
   }
 
-}
+};

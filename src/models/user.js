@@ -1,6 +1,6 @@
-import { Schema } from 'contextable';
+const { Schema } = require('contextable');
 
-export const fields = {
+const fields = {
   name: {
     type: 'String',
     validate: {
@@ -22,7 +22,7 @@ export const fields = {
   },
 };
 
-export const classMethods = {
+const classMethods = {
 
   async count() {
     return await this.ctx.mongo.collection('users').count();
@@ -42,7 +42,7 @@ export const classMethods = {
 
 };
 
-export const instanceMethods = {
+const instanceMethods = {
   insert: async(v) => {
     let res = await this.ctx.mongo.collection('users').insertOne(this);
     return this.populate(res[0]);
@@ -53,7 +53,7 @@ export const instanceMethods = {
  * Model's schema.
  */
 
-export const schema = new Schema({
+exports.schema = new Schema({
   fields,
   classMethods,
   instanceMethods,

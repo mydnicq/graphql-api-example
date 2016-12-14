@@ -1,4 +1,4 @@
-export default {
+exports.userResolvers = {
   userResolvers: {
     Query: {
       async user(root, { name }, ctx) {

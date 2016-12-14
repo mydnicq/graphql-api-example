@@ -1,4 +1,4 @@
-export default {
+exports.restaurantResolvers = {
   restaurantResolvers: {
     Query: {
       async restaurant(root, { name }, ctx) {

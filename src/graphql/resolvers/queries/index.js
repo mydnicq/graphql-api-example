@@ -1,12 +1,12 @@
-import userResolvers from './user';
-import restaurantResolvers from './restaurant';
+const { userResolvers } = require('./user');
+const { restaurantResolvers } = require('./restaurant');
 
 const mergedResolvers = Object.assign({},
   userResolvers,
   restaurantResolvers
 );
 
-const allResolvers = {
+const queryResolvers = {
   Query: {},
 };
 
@@ -14,11 +14,11 @@ for (let key in mergedResolvers) {
   if ({}.hasOwnProperty.call(mergedResolvers, key)) {
     let currentResolver = mergedResolvers[key];
     if (currentResolver.Query) {
-      Object.assign(allResolvers.Query, currentResolver.Query);
+      Object.assign(queryResolvers.Query, currentResolver.Query);
       delete currentResolver.Query;
     }
-    Object.assign(allResolvers, currentResolver);
+    Object.assign(queryResolvers, currentResolver);
   }
 }
 
-export default allResolvers;
+exports.queryResolvers = queryResolvers;

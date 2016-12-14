@@ -1,5 +1,5 @@
-import { userMutationResolvers } from './user';
-import { restaurantMutationResolvers } from './restaurant';
+const { userMutationResolvers } = require('./user');
+const { restaurantMutationResolvers } = require('./restaurant');
 
 const allResolvers = Object.assign({},
   userMutationResolvers,
@@ -16,4 +16,4 @@ for (let key in allResolvers) {
   }
 }
 
-export default mutationResolvers;
+exports.mutationResolvers = mutationResolvers;

@@ -1,7 +1,7 @@
-import * as fs from 'fs';
-import glob from 'glob';
+const fs = require('fs');
+const glob = require('glob');
 
-export const loadGqlSchema = function(pattern) {
+exports.loadGqlSchema = function(pattern) {
   return new Promise(async(resolve, reject) => {
     try {
       const files = await getGlob(pattern);

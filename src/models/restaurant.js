@@ -1,4 +1,4 @@
-import { Schema } from 'contextable';
+const { Schema } = require('contextable');
 
 const addressSchema = new Schema({
   fields: {
@@ -27,7 +27,7 @@ const addressSchema = new Schema({
   },
 });
 
-export const fields = {
+const fields = {
   borough: {
     type: 'String',
   },
@@ -55,7 +55,7 @@ export const fields = {
   },
 };
 
-export const classMethods = {
+const classMethods = {
 
   async count() {
     return await this.ctx.mongo.collection('restaurants').count();
@@ -78,7 +78,7 @@ export const classMethods = {
 
 };
 
-export const instanceMethods = {
+const instanceMethods = {
 
 };
 
@@ -86,7 +86,7 @@ export const instanceMethods = {
  * Model's schema.
  */
 
-export const schema = new Schema({
+exports.schema = new Schema({
   fields,
   classMethods,
   instanceMethods,

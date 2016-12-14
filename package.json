@@ -1,46 +1,36 @@
 {
   "name": "graphql-api-example",
-  "version": "0.0.1",
+  "version": "0.5.0",
   "description": "GraphQL API server (example)",
-  "main": "./dist/index.js",
+  "main": "./src/index.js",
+  "engines": {
+    "node": ">=7.0.0"
+  },
   "scripts": {
-    "clean": "rm -Rf ./dist",
-    "prebuild": "npm run clean; mkdir -p ./dist",
-    "build": "babel ./src --out-dir ./dist --copy-files",
-    "prestart": "npm run build",
-    "start": "node ./dist",
+    "start": "node --harmony ./scripts/start",
     "watch": "nodemon -e js,graphql --exec npm run start"
   },
   "keywords": [
     "graphql",
     "api",
-    "koa",
+    "express",
     "graphql-server"
   ],
   "author": "Tadej Stanic",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "babel-cli": "^6.14.0",
-    "babel-plugin-transform-async-to-generator": "^6.8.0",
-    "babel-preset-node6": "^11.0.0",
     "eslint": "^3.12.1",
     "eslint-config-google": "^0.7.1"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
-    "contextable": "^0.3.2",
+    "contextable": "^3.0.0",
     "cors": "^2.8.1",
     "express": "^5.0.0-alpha.2",
     "glob": "^7.1.1",
     "graphql": "^0.7.2",
     "graphql-server-express": "^0.4.3",
-    "graphql-server-koa": "^0.4.3",
     "graphql-tools": "^0.7.2",
-    "koa": "^2.0.0-alpha.7",
-    "koa-bodyparser": "^3.2.0",
-    "koa-convert": "^1.2.0",
-    "koa-cors": "0.0.16",
-    "koa-router": "^7.0.1",
     "mongodb": "^2.2.10"
   }
 }
