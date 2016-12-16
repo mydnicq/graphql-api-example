@@ -1,4 +1,13 @@
+type Error {
+	path: String
+	messages: [String]
+}
+
 type Mutation {
   # Create a new user, returns the new user
   createUser(input: UserInput): User
+}
+
+type Query {
+	restaurantCount: Int
 }

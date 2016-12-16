@@ -16,4 +16,5 @@ extend type Query {
 	# Get user by name
 	user(name: String!): User
 	usersCount: Int
+	getUsers(skip: Int, limit: Int): [User]
 }

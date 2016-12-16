@@ -1,4 +1,0 @@
-type Error {
-	path: String
-	messages: [String]
-}

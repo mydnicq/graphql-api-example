@@ -6,6 +6,13 @@
   "engines": {
     "node": ">=7.0.0"
   },
+  "config": {
+    "env": "development",
+    "httpHost": "127.0.0.1",
+    "httpPort": 3010,
+    "mongoUrl": "mongodb://localhost:27017/test",
+    "allowOrigin": true
+  },
   "scripts": {
     "start": "node --harmony ./scripts/start",
     "watch": "nodemon -e js,graphql --exec npm run start"
@@ -13,8 +20,7 @@
   "keywords": [
     "graphql",
     "api",
-    "express",
-    "graphql-server"
+    "graphql-server-express"
   ],
   "author": "Tadej Stanic",
   "license": "MIT",
@@ -28,9 +34,8 @@
     "cors": "^2.8.1",
     "express": "^5.0.0-alpha.2",
     "glob": "^7.1.1",
-    "graphql": "^0.7.2",
+    "graphql": "^0.8.2",
     "graphql-server-express": "^0.4.3",
-    "graphql-tools": "^0.7.2",
     "mongodb": "^2.2.10"
   }
 }

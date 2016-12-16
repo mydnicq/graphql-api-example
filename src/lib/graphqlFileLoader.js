@@ -1,7 +1,7 @@
 const fs = require('fs');
 const glob = require('glob');
 
-exports.loadGqlSchema = function(pattern) {
+exports.loadGqlFiles = function(pattern) {
   return new Promise(async(resolve, reject) => {
     try {
       const files = await getGlob(pattern);
@@ -13,10 +13,6 @@ exports.loadGqlSchema = function(pattern) {
   });
 };
 
-/**
- * @param  {String} pattern
- * @return {Promise}
- */
 function getGlob(pattern) {
   return new Promise((resolve, reject) => {
     glob(pattern, (err, files) => {
@@ -29,10 +25,6 @@ function getGlob(pattern) {
   });
 }
 
-/**
- * @param  {Array} fileNames
- * @return {Promise}
- */
 function makeSchema(fileNames) {
   const promises = fileNames.map(readFile);
   return Promise.all(promises).then((fileContentArr) => {
@@ -42,10 +34,6 @@ function makeSchema(fileNames) {
   });
 }
 
-/**
- * @param  {String} fileName
- * @return {Promise}
- */
 function readFile(fileName) {
   return new Promise((resolve, reject) => {
     fs.readFile(fileName, 'utf8', (err, data) => {

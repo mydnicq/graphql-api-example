@@ -29,6 +29,9 @@ module.exports = {
       2,
       "always"
     ],
-    "no-invalid-this": 0
+    "no-invalid-this": 0,
+    "valid-jsdoc": 0,
+    "require-jsdoc": 0,
+    "guard-for-in": 0
   }
 };
